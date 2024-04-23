@@ -11,26 +11,32 @@ const Hello = ({name, age}) => {
     )
 }
 
-const Display = (props) => {
-    return (
-        <div>{props.counter}</div>
-    )
-}
+const Display = ({counter}) => <div>{counter}</div>
 
-const Button = (props) => {
+const Button = ({onUse, text}) => {
     return (
-        <button onClick={props.onClick}>
-            {props.text}
+        <button onClick={onUse}>
+            {text}
         </button>
     )
 }
 
 const App = () => {
     const [counter, setCounter] = useState(0)
+    console.log('rendering with counter value', counter)
 
-    const increaseOne = () => setCounter(counter + 1)
-    const resetZero = () => setCounter(0)
-    const decreaseOne = () => setCounter(counter - 1)
+    const increaseOne = () => {
+        console.log('increasing, value before', counter)
+        setCounter(counter + 1)
+    }
+    const resetZero = () => {
+        console.log('resetting value to zero, value before', counter)
+        setCounter(0)
+    }
+    const decreaseOne = () => {
+        console.log('decreasing, value before', counter)
+        setCounter(counter - 1)
+    }
 
     return (
         <div>
