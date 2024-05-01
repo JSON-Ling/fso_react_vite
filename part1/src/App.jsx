@@ -21,6 +21,14 @@ const Button = ({handleClick, text}) => {
     )
 }
 
+const ButtonHandlerPassing = (props) => {
+    return (
+        <button onClick={props.handleClick}>
+            {props.text}
+        </button>
+    )
+}
+
 const History = (props) => {
     if (props.allClicks.length === 0) {
         return (
@@ -41,6 +49,7 @@ const App = () => {
     const [right, setRight] = useState(0)
     const [allClicks, setAll] = useState([])
     const [total, setTotal] = useState(0)
+    const [value, setValue] = useState(10)
 
     const handleLeftClick = () => {
         setAll(allClicks.concat('L'))
@@ -56,7 +65,14 @@ const App = () => {
         setTotal(left + updatedRight)
     }
 
-    debugger
+    const hello = (who) => () => {
+            console.log('hello', who)
+    }
+
+    const setToValue = (newValue) => () => {
+        console.log('value now', newValue)
+        setValue(newValue)
+    }
 
     return (
         <div>
@@ -64,8 +80,31 @@ const App = () => {
             <Button handleClick={handleLeftClick} text='left'/>
             <Button handleClick={handleRightClick} text='right'/>
             {right}
+            <button onClick={() => setValue(0)}>reset to zero</button>
+            {value}
             <p>{allClicks.join(' ')}</p>
-            <History allClicks={allClicks} />
+            <History allClicks={allClicks}/>
+
+            <div>
+                {value}
+                <button onClick={hello('world')}>Hello, world</button>
+                <button onClick={hello('react')}>Hello, react</button>
+                <button onClick={hello('function')}>Hello, function</button>
+            </div>
+
+            <div>
+                {value}
+                <button onClick={setToValue(1000)}>Set to thousand</button>
+                <button onClick={setToValue(0)}>Reset value to 0</button>
+                <button onClick={setToValue(value + 1)}>Increment value</button>
+            </div>
+
+            <div>
+                {value}
+                <ButtonHandlerPassing handleClick={() => setToValue(1000)} text="Set thousand" />
+                <ButtonHandlerPassing handleClick={() => setToValue(0)} text="Reset to 0" />
+                <ButtonHandlerPassing handleClick={() => setToValue(value + 1)} text="Increment" />
+            </div>
         </div>
     )
 }
