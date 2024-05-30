@@ -2,11 +2,9 @@ import Note from "./components/Note.jsx";
 import {useState, useEffect} from "react";
 import axios from "axios";
 
-const App = (props) => {
+const App = () => {
     const [notes, setNotes] = useState([])
-    const [newNote, setNewNote] = useState(
-        ''
-    )
+    const [newNote, setNewNote] = useState('')
     const [showAll, setShowAll] = useState(true)
 
     const notesToShow = showAll ? notes : notes.filter(note => note.important === true)
